@@ -13,7 +13,7 @@ const Post = ({username,caption,imageUrl}) => {
                 src='images/avatar/1.jpg'
                 />
             
-                <h>{username}</h>
+                <h1>{username}</h1>
              </div>
        
             {/*image */}
