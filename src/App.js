@@ -1,10 +1,11 @@
 import React,{useState,useEffect} from 'react';
 import './App.css';
 import Post from './Post'; 
-import { db,auth,storage } from './firebase';
+import { db,auth} from './firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button,Input } from '@material-ui/core'
+import ImageUpload from './ImageUpload';
 
 
 function getModalStyle() {
@@ -68,7 +69,7 @@ useEffect(() =>{
 
 useEffect(() =>{
   //this is where the code runs
-  db.collection('posts').onSnapshot(snapshot => {
+  db.collection('posts').orderBy('timestamp','desc').onSnapshot(snapshot => {
  //every time a new post is added ,this code fire up
  setPosts(snapshot.docs.map(doc =>({
    id: doc.id,
@@ -100,7 +101,13 @@ const signIn = (event) =>{
 }
 return ( 
         
-        <div className = "app" >
+      <div className = "app" >
+         {user?.displayName?(
+          <ImageUpload username={user.displayName}/>
+         ):(
+           <h3>Oops! you need to login to upload</h3>
+         )}
+         
 
           <Modal
             open={open}
@@ -169,28 +176,28 @@ return (
         </Modal>
            {/*header*/}
            <div className="app__header">
-            <img
-             className='app__headerImage'
-             src='https://bit.ly/30hrLdP'
-            />
-          </div>
-          {user ?(
-            <Button onClick={() =>auth.signOut()}>logout</Button>
-          ):(
-            
-         <div className='app__loginContainer'>
-         <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-         <Button onClick={() => setOpen(true)}>Sign Up</Button>
-         </div>
-            )}
-         
-          <h1> HELLO Clever Programmer Lets build an instagram clone with react 🔥  </h1> 
-           {/*posts*/}
-          {
-            posts.map(({id,post}) =>(
-              <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl}/>  
-            ))  
-          }
+                  <img
+                  className='app__headerImage'
+                  src='https://bit.ly/30hrLdP'
+                  />
+                </div>
+                {user ?(
+                  <Button onClick={() =>auth.signOut()}>logout</Button>
+                ):(
+                  
+              <div className='app__loginContainer'>
+              <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+              <Button onClick={() => setOpen(true)}>Sign Up</Button>
+              </div>
+                  )}
+              
+                <h1> HELLO Clever Programmer Lets build an instagram clone with react 🔥  </h1> 
+                {/*posts*/}
+                {
+                  posts.map(({id,post}) =>(
+                    <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl}/>  
+                  ))  
+                }
          
           
          
