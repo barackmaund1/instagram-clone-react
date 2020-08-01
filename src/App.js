@@ -1,20 +1,25 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import './App.css';
 import Post from './Post'; 
+import { db } from './firebase';
+
 function App() {
-    const [posts,setPosts]=useState([
-        {
-            username:'diana',
-            caption:'wow! DOPE', 
-            imageUrl:'https://bit.ly/2D5Re14'
-        },
-        {
-            username:'barack',
-            caption:'wow! Puumped', 
-            imageUrl:'https://bit.ly/2D5Re14'
-        }
-    ]);
-    return ( 
+    const [posts,setPosts]=useState([]);
+// useEffect-Run a piece of code based on a specific condition
+  
+useEffect(() =>{
+  //this is where the code runs
+  db.collection('posts').onSnapshot(snapshot => {
+ //every time a new post is added ,this code fire up
+ setPosts(snapshot.docs.map(doc =>({
+   id: doc.id,
+   post: doc.data()
+ })));
+  })
+ 
+},[])
+
+return ( 
         
         <div className = "app" >
            <div className="app__header">
@@ -25,8 +30,8 @@ function App() {
           </div>
           <h1> HELLO Clever Programmer Lets build an instagram clone with react 🔥  </h1> 
           {
-            posts.map(post =>(
-              <Post username={post.username} caption={post.caption} imageUrl={post.imageUrl}/>  
+            posts.map(({id,post}) =>(
+              <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl}/>  
             ))  
           }
          
