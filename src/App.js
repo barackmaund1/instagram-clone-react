@@ -214,13 +214,15 @@ return (
                 </div>
                  
                 
-
-                {user?.displayName?(
-                  <ImageUpload username={user.displayName}/>
-                 ):(
-                   <h3>Oops! you need to login to upload</h3>
-                 )}
+                 <div className='imageUpload__text'>
+                  { user?.displayName?(
+                    <ImageUpload username={user.displayName}/>
+                  ):(
+                    <h3>Oops! you need to login to upload</h3>
+                  )}
          
+                 </div>
+                
          
         </div>
     );
