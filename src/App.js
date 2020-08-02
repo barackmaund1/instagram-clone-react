@@ -1,11 +1,12 @@
 import React,{useState,useEffect} from 'react';
 import './App.css';
 import Post from './Post'; 
-import { db,auth} from './firebase';
+import { db,auth,storage} from './firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button,Input } from '@material-ui/core'
 import ImageUpload from './ImageUpload';
+import InstragramEmbed from 'react-instagram-embed';
 
 
 function getModalStyle() {
@@ -187,16 +188,33 @@ return (
                     </div>
                     )}
                 </div>
-               
-              
-                <h1> HELLO Clever Programmer Lets build an instagram clone with react 🔥  </h1> 
                 {/*posts*/}
-                {
-                  posts.map(({id,post}) =>(
-                    <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl}/>  
-                  ))  
-                }
-         
+               <div className='app_posts'>
+                  <div className='app__postsLeft'>
+                        {
+                          posts.map(({id,post}) =>(
+                            <Post key={id} postId={id} user={user} username={post.username} caption={post.caption} imageUrl={post.imageUrl}/>  
+                          ))  
+                        }
+                  </div>
+                  <div className='app__postsRight'>
+                      <InstragramEmbed
+                      url='https://www.instagram.com/p/CC-tn9epzK9/?utm_source=ig_web_copy_link'
+                      maxwidth={320}
+                      hideCaption={false}
+                      cointerTagName='div'
+                      protocol=''
+                      injectscript
+                      onLooading={() =>{}}
+                      onSuccess={() =>{}}
+                      onAfterRender={() =>{}}
+                      onFailure={() =>{}}
+                      />
+                  </div>
+                </div>
+                 
+                
+
                 {user?.displayName?(
                   <ImageUpload username={user.displayName}/>
                  ):(

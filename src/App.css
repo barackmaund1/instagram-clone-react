@@ -7,12 +7,15 @@
   
 }
 .app__header{
-background-color: white;
-border-bottom:1px solid lightgray ;
-padding: 20px;
-object-fit: contain;
-display: flex;
-justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
+  border-bottom:1px solid lightgray ;
+  padding: 20px;
+  object-fit: contain;
+  display: flex;
+  justify-content: space-between;
 }
 .app__headerImage{
  object-fit: contain;
@@ -21,4 +24,13 @@ justify-content: space-between;
   display: flex;
   flex-direction: column;
   text-align: center;
+}
+.app_posts{
+ padding: 20px; 
+ display: flex;
+ justify-content: center;
+}
+
+.app__postsRight{
+  margin-left: 20px;
 }
