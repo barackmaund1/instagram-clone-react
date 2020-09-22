@@ -210,7 +210,20 @@ return (
                       onAfterRender={() =>{}}
                       onFailure={() =>{}}
                       />
+                      <InstragramEmbed
+                      url='https://www.instagram.com/p/B1bI4PjFvjY/?utm_source=ig_web_copy_link'
+                      maxwidth={320}
+                      hideCaption={false}
+                      cointerTagName='div'
+                      protocol=''
+                      injectscript
+                      onLooading={() =>{}}
+                      onSuccess={() =>{}}
+                      onAfterRender={() =>{}}
+                      onFailure={() =>{}}
+                      />
                   </div>
+                  
                 </div>
                  
                 

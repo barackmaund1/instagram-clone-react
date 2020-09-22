@@ -29,8 +29,20 @@
  padding: 20px; 
  display: flex;
  justify-content: center;
+ 
 }
-
+@media only screen and (max-width: 768px){
+  .app_posts {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px !important;
+  }
+  .app__postsRight {
+    margin-left: 0px !important;
+  }
+}
 .app__postsRight{
   margin-left: 20px;
 }

@@ -3,6 +3,7 @@ import { Button } from '@material-ui/core'
 import { db,storage} from './firebase';
 import firebase from 'firebase';
 import './ImageUpload.css';
+
 const ImageUpload = ({username}) => {
 
     const [caption,setCaption]=useState('');
